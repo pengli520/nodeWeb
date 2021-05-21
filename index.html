@@ -1,0 +1,136 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-05-19 17:07:23
+ * @LastEditTime: 2021-05-20 17:45:19
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \nodeWeb\index.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    hhjk
+</body>
+
+</html>
+
+<script>
+    option = {
+        tooltip: {
+            trigger: 'item',
+            formatter: '{a} <br/>{b}: {c} ({d}%)'
+        },
+        legend: {
+            data: ['专家级工程师', '资深级工程师', '高级工程师', '中级工程师', '初级工程师']
+        },
+        color: ['#5470c6', '#91cc75', '#fac858', '#ee6666', '#73c0de', '#3ba272', '#fc8452', '#9a60b4', '#ea7ccc', '#FF69B4', 'green', 'pink', '#999', '#666', '#000', '#777', '#345', '#789', '#555', '#8B4513', 'yellow'],
+        series: [
+            {
+                name: '业务',
+                type: 'pie',
+                selectedMode: 'single',
+                center: ['45%', '56%'],
+                radius: [0, '30%'],
+                label: {
+                    position: 'inner',
+                    fontSize: 14,
+                },
+                labelLine: {
+                    show: false
+                },
+                data: [
+                    { value: 0, name: '车控' },
+                    { value: 0, name: '驾驶' },
+                    { value: 0, name: '座舱' },
+                    { value: 0, name: '云平台&大数据', selected: true },
+                    { value: 0, name: '测试' }
+                ]
+            },
+            {
+                name: '技能',
+                type: 'pie',
+                selectedMode: 'single',
+                center: ['45%', '56%'],
+                radius: ['40%', '50%'],
+                label: {
+                    position: 'inner',
+                    fontSize: 14,
+                },
+                labelLine: {
+                    show: false
+                },
+                data: [
+                    { value: 0, name: 'Java' },
+                    { value: 0, name: 'C/C++' },
+                    { value: 0, name: '运维' },
+                    { value: 0, name: '实施' },
+                    { value: 0, name: '测试' },
+                    { value: 0, name: 'UI/UE' },
+                    { value: 0, name: 'web前端' },
+                    { value: 0, name: 'Android' },
+                    { value: 0, name: 'PM' },
+                    { value: 0, name: 'SE' },
+                    { value: 0, name: 'IOS', selected: true }
+                ]
+            },
+            {
+                name: '数量',
+                type: 'pie',
+                center: ['45%', '56%'],
+                radius: ['60%', '80%'],
+                labelLine: {
+                    length: 30,
+                },
+                label: {
+                    formatter: '{a|{a}}{abg|}\n{hr|}\n  {b|{b}：}{c}  {per|{d}%}  ',
+                    backgroundColor: '#F6F8FC',
+                    borderColor: '#8C8D8E',
+                    borderWidth: 1,
+                    borderRadius: 4,
+
+                    rich: {
+                        a: {
+                            color: '#6E7079',
+                            lineHeight: 22,
+                            align: 'center'
+                        },
+                        hr: {
+                            borderColor: '#8C8D8E',
+                            width: '100%',
+                            borderWidth: 1,
+                            height: 0
+                        },
+                        b: {
+                            color: '#4C5058',
+                            fontSize: 14,
+                            fontWeight: 'bold',
+                            lineHeight: 33
+                        },
+                        per: {
+                            color: '#fff',
+                            backgroundColor: '#4C5058',
+                            padding: [3, 4],
+                            borderRadius: 4
+                        }
+                    }
+                },
+                data: [
+                    { value: 8, name: '专家级工程师' },
+                    { value: 10, name: '资深级工程师' },
+                    { value: 26, name: '高级工程师' },
+                    { value: 45, name: '中级工程师' },
+                    { value: 20, name: '初级工程师' }
+                ]
+            }
+        ]
+    };
+
+</script>
