@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-05-21 09:50:31
- * @LastEditTime: 2021-05-21 14:57:06
+ * @LastEditTime: 2021-05-27 15:13:23
  * @LastEditors: Please set LastEditors
  * @Description: sessions解析
  * @FilePath: \nodeWeb\src\identity.js
@@ -9,7 +9,7 @@
 const qs = require('qs');
 const { log, dir } = console;
 // 20分钟的有效期
-const EXPIRES = 1000 * 60 * 0.1;
+const EXPIRES = 1000 * 60 * 90;
 const sessions = {};
 /**
  * @description: 生成session
@@ -29,9 +29,10 @@ const generateSession = () => {
 /**
  * @description: 注入cookie，hack res.writeHead
  * @param {*}
- * @return {*}
+ * @return {*} secure https才生效
  */
 const injectionCookie = async (req, res) => {
+    log(sessions);
     const ContentType = {'Content-Type': 'text/plain; charset=utf-8'};
     const writeHead = res.writeHead;
     res.writeHead = function () {
@@ -39,12 +40,12 @@ const injectionCookie = async (req, res) => {
         const session = sessions[cookie.sessionId];
         const init = () => {
             const { expires, sessionId } = generateSession();
-            res.setHeader('Set-Cookie', [`sessionId=${sessionId};expires=${expires};httpOnly;secure;`]);
+            res.setHeader('Set-Cookie', [`sessionId=${sessionId};expires=${expires};httpOnly;`]);
         };
         if (session) {
             // 判断是否过期
             if (session.expires > +new Date()) {
-                res.setHeader('Set-Cookie', [`sessionId=${cookie.sessionId};expires=${+new Date() + EXPIRES};httpOnly;secure;`]);
+                res.setHeader('Set-Cookie', [`sessionId=${cookie.sessionId};expires=${+new Date() + EXPIRES};httpOnly;`]);
             } else {
                 delete sessions[cookie.sessionId];
                 init();
