@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "formidable": "^1.2.2",
+    "mongoose": "^5.12.12",
     "qs": "^6.10.1",
     "url": "^0.11.0"
   }

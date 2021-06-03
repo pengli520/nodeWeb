@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-05-21 09:50:48
- * @LastEditTime: 2021-05-26 09:37:27
+ * @LastEditTime: 2021-06-03 14:31:45
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nodeWeb\src\file.js
@@ -14,25 +14,21 @@ const path = require('path');
  * @param {*} res
  * @return {*}
  */
- const { log, dir } = console;
  const getFile = (fileName, req, res) => {
-    if (req.headers['if-none-match'] && false) {
-        log('304');
+    if (req.headers['if-none-match']) {
         res.writeHead(304);
-        res.end()
     } else {
-        fs.readFile(path.join(__dirname, '../' , fileName), (err, buffer) => {
+        console.log(path.join(process.cwd(), fileName));
+        fs.readFile(path.join(process.cwd(), fileName), (err, buffer) => {
             if (err) {
                 res.writeHead(404);
-                res.end('error');
                 return;
             };
             res.writeHead(200, {
                 'Content-Type': 'text/html',
                 'cache-control': 'max-age=90',
                 'Etag': '12345678',
-            });
-            console.log(fileName);
+            }, true);
             res.end(buffer);
         });
     }

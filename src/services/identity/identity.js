@@ -1,13 +1,12 @@
 /*
  * @Author: your name
  * @Date: 2021-05-21 09:50:31
- * @LastEditTime: 2021-05-27 15:13:23
+ * @LastEditTime: 2021-06-03 14:05:57
  * @LastEditors: Please set LastEditors
  * @Description: sessions解析
  * @FilePath: \nodeWeb\src\identity.js
  */
 const qs = require('qs');
-const { log, dir } = console;
 // 20分钟的有效期
 const EXPIRES = 1000 * 60 * 90;
 const sessions = {};
@@ -32,8 +31,7 @@ const generateSession = () => {
  * @return {*} secure https才生效
  */
 const injectionCookie = async (req, res) => {
-    log(sessions);
-    const ContentType = {'Content-Type': 'text/plain; charset=utf-8'};
+    const contentType = {'Content-Type': 'text/plain; charset=utf-8'};
     const writeHead = res.writeHead;
     res.writeHead = function () {
         const cookie = qs.parse(req.headers.cookie);
@@ -54,7 +52,12 @@ const injectionCookie = async (req, res) => {
         } else {
             init();
         }
-        writeHead.apply(this, arguments);
+        const data = Array.from(arguments);
+        writeHead.call(this, ...arguments, contentType);
+        // log(...arguments, data);
+        if (!data[2]) {
+            res.end(JSON.stringify(data[1]));
+        }
     };
 };
 
