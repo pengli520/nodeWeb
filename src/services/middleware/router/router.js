@@ -1,14 +1,19 @@
 /*
  * @Author: your name
  * @Date: 2021-05-28 10:58:32
- * @LastEditTime: 2021-05-31 17:30:15
+ * @LastEditTime: 2021-06-04 17:05:37
  * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
+ * @Description: 自动化匹配路由：http//2222.22.0/controll/a/m
  * @FilePath: \nodeWeb\src\router.js
  */
+const fs = require('fs');
+const path = require('path');
+const router = (req, res) => {
+    const pathname = req.pathname;
+    const query = req.query;
+    const paths = pathname.split('/');
+    console.log(pathname, paths);
 
-const MVC = (req, res, pathName, query) => {
-    const paths = pathName.split('/');
     if (paths.length < 3) {
         res.writeHead(500);
         return;
@@ -18,8 +23,9 @@ const MVC = (req, res, pathName, query) => {
     const args = paths.slice(3);
     let module;
     try {
-        module = require('./controll/' + c);
-    } catch {
+        module = require(path.join(process.cwd(), './controll/' + c));
+    } catch (err) {
+        console.log(err);
         res.writeHead(500);
         return;
     }
@@ -31,4 +37,4 @@ const MVC = (req, res, pathName, query) => {
     }
 };
 
-module.exports = MVC;
+module.exports = router;

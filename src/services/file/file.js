@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-05-21 09:50:48
- * @LastEditTime: 2021-06-03 14:31:45
+ * @LastEditTime: 2021-06-04 15:44:02
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nodeWeb\src\file.js
@@ -14,7 +14,8 @@ const path = require('path');
  * @param {*} res
  * @return {*}
  */
- const getFile = (fileName, req, res) => {
+ const getFile = (req, res) => {
+     const fileName = req.pathname;
     if (req.headers['if-none-match']) {
         res.writeHead(304);
     } else {

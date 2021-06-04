@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-05-19 15:48:16
- * @LastEditTime: 2021-06-03 14:29:52
+ * @LastEditTime: 2021-06-04 16:26:49
  * @LastEditors: Please set LastEditors
  * @Description: 服务入口文件
  * @FilePath: \nodeWeb\index.js
@@ -16,14 +16,11 @@
  */
 // "use strict"
 const http = require('http');
-const { injectionCookie } = require('./services/identity/identity');
-const reqMethodType = require('./services/request/index.js');
-const DB = require('./database/index.js');
-const { log, dir } = console;
+// const DB = require('./database/index.js');
+const app = require('./services/middleware/index.js');
 
 
 // DB.usersCurd.insert([{nick_name: 'wer456u00'}, {nick_name: '66'}])
 http.createServer((req, res) => {
-    injectionCookie(req, res);
-    reqMethodType(req, res);
+    app(req, res);
 }).listen(9999);

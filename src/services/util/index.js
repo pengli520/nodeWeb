@@ -1,12 +1,13 @@
 /*
  * @Author: your name
  * @Date: 2021-05-28 13:46:17
- * @LastEditTime: 2021-06-03 14:32:23
+ * @LastEditTime: 2021-06-04 17:17:47
  * @LastEditors: Please set LastEditors
  * @Description: 工具函数
  * @FilePath: \nodeWeb\src\util\index.js
  */
 const url = require('url');
+const path = require('path');
 /**
  * @description: 解析url，回去路径，查询参数
  * @param {*} req
@@ -48,9 +49,24 @@ const isObject = (whereStr) => {
     }
 };
 
+// post请求是否携带数据
+const hasBodyContent = (req) => {
+    return 'content-length' in req.headers || 'transfer-encoding' in req.headers;
+};
+
+/**
+ * @description: 返回文件地址
+ * @param {*} name：路径
+ * @return {*}
+ */
+const pathDealWith = (name) => {
+    return path.join(process.cwd(), name)
+};
 module.exports = {
     parseUrl,
     parsingSuffix,
     isArray,
     isObject,
+    hasBodyContent,
+    pathDealWith,
 };
